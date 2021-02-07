@@ -15,6 +15,7 @@ This can be remedied by using a mutex, and some change to interrupt.c
 
 The code needed is as follows:
 
+{
 void GetMutex() 
 {
     uint32_t mutex_acquired = 0; 
@@ -32,7 +33,9 @@ void GetMutex()
             OSTimeDly(1);
     }
 }
+}
 
+{
 void ClearMutex()
 {
     __asm(" CPSID i"); 
@@ -43,7 +46,9 @@ void ClearMutex()
     }
     __asm(" CPSIE i");
 }
+}
 
+{
 extern volatile uint32_t mutex;
 extern volatile uint32_t sigint;    // when set it signals that an interrupt 
                                     // was ignored due to a set mutex
@@ -61,6 +66,6 @@ void SysTick_Handler(void)
     }
     __asm(" CPSIE i");
 }
-
+}
 
 
