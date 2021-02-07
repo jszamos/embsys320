@@ -1,5 +1,6 @@
 When completed as required, the output of the running program will occasionally contain 'glitches' where one tasks output stomps on another tasks output. 
 
+<code>
 TaskThree: count = 415
 TaskThree: count = 416askOne: Turn LED ON
 
@@ -10,10 +11,11 @@ TaskThree: count = 514
 TaskThree: coaskOne: Turn LED ON
 unt = 515
 TaskThree: count = 516
+</code>
 
 This can be remedied by using a mutex, and some change to interrupt.c 
 
-The code needed is as follows:
+Some of the code needed for this change is as follows:
 
 <code>
 void GetMutex() 
@@ -35,7 +37,7 @@ void GetMutex()
 }
 </code>
 
-
+<code>
 void ClearMutex()
 {
     __asm(" CPSID i"); 
@@ -46,9 +48,9 @@ void ClearMutex()
     }
     __asm(" CPSIE i");
 }
-}
+</code>
 
-{
+<code>
 extern volatile uint32_t mutex;
 extern volatile uint32_t sigint;    // when set it signals that an interrupt 
                                     // was ignored due to a set mutex
@@ -66,6 +68,6 @@ void SysTick_Handler(void)
     }
     __asm(" CPSIE i");
 }
-}
+</code>
 
 
