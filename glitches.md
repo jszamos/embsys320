@@ -20,6 +20,7 @@ Some of the code needed for this change is as follows:
 <code>
 void GetMutex() 
 {
+    
     uint32_t mutex_acquired = 0; 
     
     while (!mutex_acquired) {  
@@ -39,7 +40,9 @@ void GetMutex()
 
 void ClearMutex()
 {
+
     __asm(" CPSID i"); 
+    
     mutex = 0; 
     if (sigint) { 
         sigint = 0; 
