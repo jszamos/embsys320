@@ -35,9 +35,8 @@ void GetMutex()
             OSTimeDly(1);
     }
 }
-</code>
 
-<code>
+
 void ClearMutex()
 {
     __asm(" CPSID i"); 
@@ -48,9 +47,8 @@ void ClearMutex()
     }
     __asm(" CPSIE i");
 }
-</code>
 
-<code>
+
 extern volatile uint32_t mutex;
 extern volatile uint32_t sigint;    // when set it signals that an interrupt 
                                     // was ignored due to a set mutex
